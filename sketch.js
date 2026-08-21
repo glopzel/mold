@@ -9,7 +9,7 @@ let mic;
 let amplitude;
 
 let molds = [];
-let num = 2000;
+let num = 1000;
 
 let d;
 
@@ -29,34 +29,18 @@ function setup() {
   angleMode(DEGREES);
 
   d = pixelDensity();
-
-
-  // -------------------------
-  // AUDIO
-  // -------------------------
-
   mic = new p5.AudioIn();
   amplitude = new p5.Amplitude();
 
   userStartAudio();
 
   mic.start(() => {
-
     console.log("MIC STARTED");
-
     amplitude.setInput(mic);
-
   });
 
-
-  // -------------------------
-  // CREATE MOLDS
-  // -------------------------
-
   for (let i = 0; i < num; i++) {
-
     molds[i] = new Mold();
-
   }
 }
 
@@ -68,26 +52,11 @@ function draw() {
 
   // Physarum needs the pixels
   loadPixels();
-
-
-  // -------------------------
-  // AUDIO
-  // -------------------------
-
   volume = amplitude.getLevel();
 
-
-  // -------------------------
-  // UPDATE MOLDS
-  // -------------------------
-
   for (let i = 0; i < num; i++) {
-
     molds[i].stop = false;
-
     molds[i].update();
-
     molds[i].display();
-
   }
 }

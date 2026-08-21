@@ -1,21 +1,12 @@
 class Mold {
 
   constructor() {
-
-    // -------------------------
     // POSITION
-    // -------------------------
-
     this.x = random(width);
     this.y = random(height);
 
     this.r = 0.5;
-
-
-    // -------------------------
     // MOVEMENT
-    // -------------------------
-
     this.heading = random(360);
 
     this.vx = cos(this.heading);
@@ -25,70 +16,39 @@ class Mold {
 
     this.stop = false;
 
-
-    // -------------------------
     // AUDIO-REACTIVE POINT
-    // -------------------------
-
     // Only a small percentage
     // of molds react to sound
 
     this.hot = random() < hotChance;
-
-
-    // -------------------------
     // SENSORS
-    // -------------------------
-
-    this.rSensorPos =
-      createVector(0, 0);
-
-    this.lSensorPos =
-      createVector(0, 0);
-
-    this.fSensorPos =
-      createVector(0, 0);
-
+    this.rSensorPos = createVector(0, 0);
+    this.lSensorPos = createVector(0, 0);
+    this.fSensorPos = createVector(0, 0);
     this.sensorAngle = 45;
-
     this.sensorDist = 10;
   }
 
 
   update() {
-
-    // -------------------------
     // MOVEMENT
-    // -------------------------
-
     if (this.stop) {
-
       this.vx = 0;
       this.vy = 0;
-
     } else {
-
       this.vx = cos(this.heading);
       this.vy = sin(this.heading);
 
     }
 
-
-    // -------------------------
     // MOVE
-    // -------------------------
-
     this.x =
       (this.x + this.vx + width) % width;
 
     this.y =
       (this.y + this.vy + height) % height;
 
-
-    // -------------------------
     // SENSOR POSITIONS
-    // -------------------------
-
     this.getSensorPos(
       this.rSensorPos,
       this.heading + this.sensorAngle
@@ -104,11 +64,7 @@ class Mold {
       this.heading
     );
 
-
-    // -------------------------
     // READ PIXELS
-    // -------------------------
-
     let index;
 
     let l;
@@ -117,7 +73,6 @@ class Mold {
 
 
     // RIGHT SENSOR
-
     index =
       4 *
       (d * floor(this.rSensorPos.y)) *
@@ -129,7 +84,6 @@ class Mold {
 
 
     // LEFT SENSOR
-
     index =
       4 *
       (d * floor(this.lSensorPos.y)) *
@@ -141,7 +95,6 @@ class Mold {
 
 
     // FRONT SENSOR
-
     index =
       4 *
       (d * floor(this.fSensorPos.y)) *
@@ -151,45 +104,24 @@ class Mold {
 
     f = pixels[index];
 
-
-    // -------------------------
     // TURNING
-    // -------------------------
-
     if (f > l && f > r) {
-
       this.heading += 0;
-
     }
 
     else if (f < l && f < r) {
-
       if (random(1) < 0.5) {
-
-        this.heading +=
-          this.rotAngle;
-
+        this.heading += this.rotAngle;
       } else {
-
-        this.heading -=
-          this.rotAngle;
-
+        this.heading -= this.rotAngle;
       }
-
     }
 
     else if (l > r) {
-
-      this.heading -=
-        this.rotAngle;
-
+      this.heading -= this.rotAngle;
     }
-
     else if (r > l) {
-
-      this.heading +=
-        this.rotAngle;
-
+      this.heading += this.rotAngle;
     }
   }
 
@@ -197,17 +129,12 @@ class Mold {
   display() {
 
     noStroke();
-
-
-    // -------------------------
     // NORMAL PHYSARUM
-    // -------------------------
-
     fill(
       180,
       200,
       255,
-      25
+      45 // alpha, menor valor es mas transparente
     );
 
     ellipse(
@@ -217,11 +144,7 @@ class Mold {
       2
     );
 
-
-    // -------------------------
     // AUDIO REACTIVE POINT
-    // -------------------------
-
     if (this.hot) {
 
       let brightness = map(
@@ -239,11 +162,7 @@ class Mold {
           255
         );
 
-
-      // -------------------------
       // SOFT GLOW
-      // -------------------------
-
       fill(
         180,
         220,
@@ -258,11 +177,7 @@ class Mold {
         7
       );
 
-
-      // -------------------------
       // BRIGHT CORE
-      // -------------------------
-
       fill(
         200,
         230,
