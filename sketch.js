@@ -20,6 +20,32 @@ let volume = 0;
 let hotChance = 0.03;
 
 
+function getFullScreen() {
+  return (
+    document.fullscreenElement ||
+    document.webkitFullScreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullScreenElement
+  );
+}
+
+function toggleScreen() {
+  if (getFullScreen()) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen().catch(console.log);
+  }
+}
+
+document.addEventListener("click", () => {
+  toggleScreen();
+});
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
