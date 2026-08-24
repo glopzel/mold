@@ -9,7 +9,7 @@ let mic;
 let amplitude;
 
 let molds = [];
-let num = 1000;
+let num = 1200;
 
 let d;
 
@@ -18,7 +18,7 @@ let volume = 0;
 
 // Percentage of molds that react to audio
 let hotChance = 0.03;
-
+let smoothVolume = 0;
 
 function getFullScreen() {
   return (
@@ -74,11 +74,12 @@ function setup() {
 function draw() {
 
   // Keep the trail
-  background(0, 8);
+  background(0, 5);
 
   // Physarum needs the pixels
   loadPixels();
   volume = amplitude.getLevel();
+  smoothVolume = lerp(smoothVolume, volume, 0.08);
 
   for (let i = 0; i < num; i++) {
     molds[i].stop = false;

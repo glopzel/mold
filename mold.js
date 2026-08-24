@@ -26,19 +26,27 @@ class Mold {
     this.lSensorPos = createVector(0, 0);
     this.fSensorPos = createVector(0, 0);
     this.sensorAngle = 45;
-    this.sensorDist = 10;
+    // higher speed higher sensor Dist, era 10
+    this.sensorDist = 15;
   }
 
 
   update() {
+    let speed;
+
+    if (smoothVolume < 0.01) {
+      speed = 0.05;
+    } else {
+      speed = map(smoothVolume, 0.01, 0.04, 0.1, 7);
+      speed = constrain(speed, 0.1, 7)
+    }
     // MOVEMENT
     if (this.stop) {
       this.vx = 0;
       this.vy = 0;
     } else {
-      this.vx = cos(this.heading);
-      this.vy = sin(this.heading);
-
+      this.vx = cos(this.heading) * speed;
+      this.vy = sin(this.heading) * speed;
     }
 
     // MOVE
@@ -131,17 +139,17 @@ class Mold {
     noStroke();
     // NORMAL PHYSARUM
     fill(
+      100,
       180,
-      200,
       255,
-      45 // alpha, menor valor es mas transparente
+      25 // alpha, menor valor es mas transparente
     );
 
     ellipse(
       this.x,
       this.y,
-      2,
-      2
+      6,
+      6
     );
 
     // AUDIO REACTIVE POINT
