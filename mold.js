@@ -137,7 +137,6 @@ class Mold {
   display() {
 
     noStroke();
-    colorMode(HSB, 360, 100, 100, 255); 
     // NORMAL PHYSARUM
     fill(
       100,
