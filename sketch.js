@@ -9,7 +9,7 @@ let mic;
 let amplitude;
 
 let molds = [];
-let num = 1200;
+let num = 800;
 
 let d;
 
