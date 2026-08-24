@@ -49,8 +49,7 @@ function windowResized() {
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
-  colorMode(HSB, 360, 100, 100, 255); 
-
+  
   background(0);
 
   angleMode(DEGREES);
