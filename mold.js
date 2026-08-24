@@ -139,9 +139,9 @@ class Mold {
     noStroke();
     // NORMAL PHYSARUM
     fill(
+      210,
+      10,
       100,
-      20,
-      255,
       25 // alpha, menor valor es mas transparente
     );
 
