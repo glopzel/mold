@@ -140,9 +140,9 @@ class Mold {
     colorMode(HSB, 360, 100, 100, 255); 
     // NORMAL PHYSARUM
     fill(
-      210,
-      10,
       100,
+      180,
+      255,
       25 // alpha, menor valor es mas transparente
     );
 
